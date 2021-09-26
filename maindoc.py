@@ -4,12 +4,13 @@ import numpy as np
 import pprint
 
 def interface():
-    print("""La siguiente es una estadística de las muertes ocasionadas en Estados Unidos por policías.""")
     while True:
         open_doc = open("shootings_wash_post.csv")
         read_doc = csv.reader(open_doc)
         main_data = list(read_doc)
-        print()
+        print("_"*60,"\n")
+        print("MUERTES CAUSADAS POR POLICIÍAS EN ESTADOS UNIDOS")
+        print("_"*60)
         print("1. Datos de la Base de Datos.")
         print("2. Muertes por Estado.")
         print("3. Taza de Hombres vs. Mujeres.")
@@ -19,16 +20,34 @@ def interface():
         print("7. Salir.\n")
         seleccion_interface_main = int(input("Opción: "))
         if seleccion_interface_main == 1:
+            print("_"*60,"\n")
+            print("Datos de la Base de Datos".upper())
+            print("_"*60)
             pprint.pprint(main_data[0])
         elif seleccion_interface_main == 2:
+            print("_"*60,"\n")
+            print("Muertes por Estado".upper())
+            print("_"*60)
             muertes_por_estado()
         elif seleccion_interface_main == 3:
+            print("_"*60,"\n")
+            print("Taza de Hombres vs. Mujeres".upper())
+            print("_"*60)
             taza_hombres_mujeres()
         elif seleccion_interface_main == 4:
+            print("_"*60,"\n")
+            print("Tipo de Arma Utilizada".upper())
+            print("_"*60)
             tipo_de_arma()
         elif seleccion_interface_main == 5:
+            print("_"*60,"\n")
+            print("Edades".upper())
+            print("_"*60)
             edades_de_asesinados()
         elif seleccion_interface_main == 6:
+            print("_"*60,"\n")
+            print("Probabilidad de Morir según cierta edad (Monte-Carlo)".upper())
+            print("_"*60)
             probabilidad_ser_asesinado()
         elif seleccion_interface_main == 7:
             break
@@ -158,8 +177,6 @@ def tipo_de_arma():
             plt.show()
         elif seleccion_interface_arma == 3:
             break
-
-
 
 def mi_promedio(lista):
     promedio = 0
