@@ -26,7 +26,8 @@ def interface():
         print("4. Tipo de Arma Utilizada.")
         print("5. Edades.")
         print("6. Probabilidad de Morir según cierta edad (Monte-Carlo).")
-        print("7. Salir.\n")
+        print("7. Asesinatos Policiales por Raza.")
+        print("8. Salir.\n")
 
         # Selección de opción.
         seleccion_interface_main = int(input("Opción: "))
@@ -73,8 +74,15 @@ def interface():
             print("_"*60)
             probabilidad_ser_asesinado()
         
-        # Opción 7, se termina el programa y la while loop.
+        # Opción 7, se abre la función asesinatos por raza.
         elif seleccion_interface_main == 7:
+            print("_"*60,"\n")
+            print("Asesinatos Policiales por Raza".upper())
+            print("_"*60)
+            asesinatos_raza()
+        
+        # Opción 8, se termina el programa y el while loop.
+        elif seleccion_interface_main == 8:
             print("Hasta luego...")
             break
 
@@ -90,7 +98,7 @@ def muertes_por_estado():
     
     # Diccionario que cuenta la cantidad de muertes por estado
     muertes_por_estado = {}
-    for i in range(1,5553):
+    for i in range(1,len(main_data)):
         # Si el estado ya está en keys, se le suma 1 al valor
         if main_data[i][9] in muertes_por_estado.keys():
             muertes_por_estado[main_data[i][9]] += 1
@@ -152,7 +160,7 @@ def taza_hombres_mujeres():
     # Se crea el diccionario de muertes "M" y "F", dejando el valor en 0.
     muertes_masculinos_y_femeninos = {"M":0,"F":0}
 
-    for i in range(1,5553):
+    for i in range(1,len(main_data)):
         # Con la foor loop si el csv es "M" se suma 1 a "M", 
         if main_data[i][6] == "M":
             muertes_masculinos_y_femeninos["M"] += 1
@@ -224,7 +232,7 @@ def tipo_de_arma():
 
     # Se crea diccionario de los tipos de armas utlizadas
     armas = {}
-    for i in range(1,5553):
+    for i in range(1,len(main_data)):
         # Si el arma ya se registó, se le suma 1
         if main_data[i][4] in armas.keys():
             armas[main_data[i][4]] += 1
@@ -424,7 +432,7 @@ def edades_de_asesinados():
 
     # Se define la lista todas las edades registradas en el documento
     lista_edades = []
-    for i in range(1,5553):
+    for i in range(1,len(main_data)):
 
         # Se añaden a la lista únicamente las edades que fueron registradas,
         # es decir, aquellas con una longitud mayor a 0. 
@@ -594,8 +602,7 @@ def probabilidad_de_morir(media,desviacion,ptos,lim_inf,lim_sup):
             puntos_dentro += 1
     
     # Se establece el texto que se mostrará en la caja de texto
-    probabilidad_texto = f"P({round(lim_inf,1)}<Z<{round(lim_sup,1)})\
-                          ={round((puntos_dentro/ptos)*area_total*100,2)}%"
+    probabilidad_texto = f"P({round(lim_inf,1)}<Z<{round(lim_sup,1)}) = {round((puntos_dentro/ptos)*area_total*100,2)}%"
 
     # Se establecen las propiedades de la caja de texto
     propiedades_caja_de_texto = {'ha': 'center', 'va': 'center', \
@@ -616,7 +623,7 @@ def probabilidad_ser_asesinado():
 
     # Se define la lista de todas las edades de el documento csv.
     lista_edades = []
-    for i in range(1,5553):
+    for i in range(1,len(main_data)):
         if len(main_data[i][5]) > 0:
             lista_edades.append(int(main_data[i][5]))
 
@@ -640,10 +647,10 @@ def probabilidad_ser_asesinado():
 
             # Se presenta el gráfico
             probabilidad_de_morir(mi_promedio(lista_edades),
-                                       mi_desviacion(lista_edades),
-                                       ptos_monte_carlo,
-                                       mi_promedio(lista_edades)-50,
-                                       edad_prob)
+                                  mi_desviacion(lista_edades),
+                                  ptos_monte_carlo,
+                                  mi_promedio(lista_edades)-50,
+                                  edad_prob)
 
         elif seleccion_interface_prob_edad == 2:
             # Se pide edad y puntos de la simuclación
@@ -652,9 +659,9 @@ def probabilidad_ser_asesinado():
 
             # Se presenta el gráfico
             probabilidad_de_morir(mi_promedio(lista_edades),
-                                       mi_desviacion(lista_edades),
-                                       ptos_monte_carlo,edad_prob,
-                                       mi_promedio(lista_edades)+50)
+                                  mi_desviacion(lista_edades),
+                                  ptos_monte_carlo,edad_prob,
+                                  mi_promedio(lista_edades)+50)
         
         elif seleccion_interface_prob_edad == 3:
             # Se pide edad y puntos de la simuclación
@@ -672,10 +679,10 @@ def probabilidad_ser_asesinado():
 
             # Se presenta el gráfico
             probabilidad_de_morir(mi_promedio(lista_edades),
-                                       mi_desviacion(lista_edades),
-                                       ptos_monte_carlo,
-                                       edad_prob_1,
-                                       edad_prob_2)
+                                  mi_desviacion(lista_edades),
+                                  ptos_monte_carlo,
+                                  edad_prob_1,
+                                  edad_prob_2)
 
         # Si la opción es 4, se sale del menú secudario.
         elif seleccion_interface_prob_edad == 4:
@@ -685,6 +692,90 @@ def probabilidad_ser_asesinado():
         else:
             print("Elige una opción válida.")
 
+def asesinatos_raza():
+    # Se abre, lee y enlista el documento csv.
+    open_doc = open("shootings_wash_post.csv")
+    read_doc = csv.reader(open_doc)
+    main_data = list(read_doc)
+
+    # Definimos diccionario que cuenta la cantidad de asesinatos por raza.
+    # Las Keys son ['', 'A','B','H','N','O','W']
+    cant_asesinados_raza = {}
+    for i in range(1,len(main_data)):
+        if main_data[i][7] in cant_asesinados_raza.keys():
+            cant_asesinados_raza[main_data[i][7]] += 1
+        else:
+            cant_asesinados_raza.setdefault(main_data[i][7],1)
+    
+    # Para Obtener los porcentajes, contamos la cantidad total de asesinados:
+    gente_total = 0
+    for i in cant_asesinados_raza.values():
+        gente_total += i
+    
+    # Obtenemos los porcentajes de muestos según su raza.
+    porcentaje_asesinados_white = (cant_asesinados_raza["W"]*100)/gente_total
+    porcentaje_asesinados_black = (cant_asesinados_raza["B"]*100)/gente_total
+    porcentaje_asesinados_latin = (cant_asesinados_raza["H"]*100)/gente_total
+    porcentaje_asesinados_asian = (cant_asesinados_raza["A"]*100)/gente_total
+    porcentaje_asesinados_other = 100 - porcentaje_asesinados_white \
+                                      - porcentaje_asesinados_black \
+                                      - porcentaje_asesinados_latin \
+                                      - porcentaje_asesinados_asian
+    
+    #Se define la lista de porcetajes (necesaria para el diagrama de pie).
+    lista_porcentajes_raza = [porcentaje_asesinados_white,
+                              porcentaje_asesinados_black,
+                              porcentaje_asesinados_latin,
+                              porcentaje_asesinados_asian,
+                              porcentaje_asesinados_other]
+
+    # Colores según la raza para el diagrama de pie
+    lista_colores_raza = ["#ffcfcc","#41314d","#87602e","#d4cb20","#00c1d6"]
+
+    # Letreros del diagrama de pie
+    lista_labels = ["Blancos","Afroamericanos","Latinos","Asiáticos","Otros"]
+
+    # Diagrama de Pie Taza Hombres vs. Mujeres
+    figura6_diagrama_pie_raza = plt.figure()
+
+    # Estableciendo el ancho y alto de la figura.
+    figura6_diagrama_pie_raza.set_figwidth(10)
+    figura6_diagrama_pie_raza.set_figheight(6)
+
+    plt.pie(lista_porcentajes_raza,
+            colors=lista_colores_raza,
+            labels=lista_labels,
+            autopct="%1.1f%%")
+    plt.legend(bbox_to_anchor=(0.8, 0.1, 0.5, 0.5))
+    plt.tight_layout()
+
+    # Menú Secundario: Asesinatos Según Raza.
+    # While loop, mantiene abierto el programa.
+    while True:
+        # Posibles opciones.
+        print("1. Datos Obtenidos.")
+        print("2. Porcentajes.")
+        print("3. Diagrama de Pie.")
+        print("4. Salir.\n")
+
+        # Selector de opción
+        seleccion_interface_raza = int(input("Opción: "))
+
+        if seleccion_interface_raza == 1:
+            pprint.pprint(cant_asesinados_raza)
+            print()
+        elif seleccion_interface_raza == 2:
+            print(f"Blancos asesinados: {round(porcentaje_asesinados_white,2)} %.")
+            print(f"Afroamericanos asesinados: {round(porcentaje_asesinados_black,2)} %.")
+            print(f"Latinos asesinados: {round(porcentaje_asesinados_latin,2)} %.")
+            print(f"Asiáticos asesinados: {round(porcentaje_asesinados_asian,2)} %.")
+            print(f"Otros grupos étnicos asesinados: {round(porcentaje_asesinados_other,2)} %.\n")
+        elif seleccion_interface_raza == 3:
+            plt.show()
+        elif seleccion_interface_raza == 4:
+            break
+        else:
+            print("Opción no válida.")
 
 if __name__ == "__main__":
     interface()
