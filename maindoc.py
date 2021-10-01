@@ -30,64 +30,68 @@ def interface():
         print("8. Salir.\n")
 
         # Selección de opción.
-        seleccion_interface_main = int(input("Opción: "))
+        seleccion_interface_main = input("Opción: ")
+
+        if not seleccion_interface_main.isnumeric():
+            print("Solo enteros se aceptan como opción.\n")
 
         # Opción 1, se muestra el encabezado de la tabla 1.
-        if seleccion_interface_main == 1:
+        elif float(seleccion_interface_main) == 1:
             print("_"*60,"\n")
             print("Datos de la Base de Datos".upper())
             print("_"*60)
             pprint.pprint(main_data[0])
+            print()
         
         # Opción 2, se abre la función muertes por estado.
-        elif seleccion_interface_main == 2:
+        elif float(seleccion_interface_main) == 2:
             print("_"*60,"\n")
             print("Muertes por Estado".upper())
             print("_"*60)
             muertes_por_estado()
         
         # Opción 3, se abre la función taza hombres mujeres.
-        elif seleccion_interface_main == 3:
+        elif float(seleccion_interface_main) == 3:
             print("_"*60,"\n")
             print("Taza de Hombres vs. Mujeres".upper())
             print("_"*60)
             taza_hombres_mujeres()
         
         # Opción 4, se abre la función tipo de arma.
-        elif seleccion_interface_main == 4:
+        elif float(seleccion_interface_main) == 4:
             print("_"*60,"\n")
             print("Tipo de Arma Utilizada".upper())
             print("_"*60)
             tipo_de_arma()
 
         # Opción 5, se abre la función edades de asesinados.
-        elif seleccion_interface_main == 5:
+        elif float(seleccion_interface_main) == 5:
             print("_"*60,"\n")
             print("Edades".upper())
             print("_"*60)
             edades_de_asesinados()
         
         # Opción 6, se abre la función posibilidad de ser asesinado.
-        elif seleccion_interface_main == 6:
+        elif float(seleccion_interface_main) == 6:
             print("_"*60,"\n")
             print("Probabilidad de Morir según cierta edad (Monte-Carlo)".upper())
             print("_"*60)
             probabilidad_ser_asesinado()
         
         # Opción 7, se abre la función asesinatos por raza.
-        elif seleccion_interface_main == 7:
+        elif float(seleccion_interface_main) == 7:
             print("_"*60,"\n")
             print("Asesinatos Policiales por Raza".upper())
             print("_"*60)
             asesinatos_raza()
         
         # Opción 8, se termina el programa y el while loop.
-        elif seleccion_interface_main == 8:
+        elif float(seleccion_interface_main) == 8:
             print("Hasta luego...")
             break
 
         else:
-            print("Elige una opción válida.")
+            print("Elige una opción válida.\n")
 
 # Se define la función muertes por estado.
 def muertes_por_estado():
@@ -131,24 +135,27 @@ def muertes_por_estado():
         print("3. Salir.\n")
 
         # Selección de opción.
-        seleccion_interface_edad = int(input("Opción: "))
+        seleccion_interface_edad = input("Opción: ")
+
+        if not seleccion_interface_edad.isnumeric():
+            print("Solo enteros se aceptan como opción.\n")
 
         # Opción 1, se imprime el diccionario de las muertes por estado.
-        if seleccion_interface_edad == 1:
+        elif float(seleccion_interface_edad) == 1:
             pprint.pprint(muertes_por_estado)
-        
+            print()
         # Opción 2, se muestra la figura1.
-        elif seleccion_interface_edad == 2:
+        elif float(seleccion_interface_edad) == 2:
             plt.show()
         
         # Opción 3, se sale del Menú Secundario: Muertes por estado.
         # Se regresa al menú principal.
-        elif seleccion_interface_edad == 3:
+        elif float(seleccion_interface_edad) == 3:
             break
 
         # Si no se elige una opción válida, se presenta el siguiente mensaje.
         else:
-            print("Elige una opción válida.")
+            print("Elige una opción válida.\n")
 
 # Se define la función taza hombres mujeres.
 def taza_hombres_mujeres():
@@ -184,9 +191,9 @@ def taza_hombres_mujeres():
     figura2_diagrama_pie_sexo.set_figheight(6)
 
     plt.pie([prevalencia_masculina,prevalencia_femenina],#Porcentajes "M" vs "F".
-            labels = ["95.57%","4.43%"],                 # Labels del diagrama de pie.
-            labeldistance = 0.5,                         # Distancia de labels.
-            colors = ["#00b7ff","hotpink"])              # Colores.
+            labels = ["95.57%","4.43%"],         # Labels del diagrama de pie.
+            labeldistance = 0.5,                 # Distancia de labels.
+            colors = ["#00b7ff","hotpink"])      # Colores.
     
     # Título de figura2
     plt.title("Porcentaje de Hombres y Mujeres Asesinadas por Policías",
@@ -204,24 +211,27 @@ def taza_hombres_mujeres():
         print("3. Salir.\n")
 
         # Selección de opción.
-        seleccion_interface_sexo = int(input("Opción: "))
+        seleccion_interface_sexo = input("Opción: ")
+
+        if not seleccion_interface_sexo.isnumeric():
+            print("Solo enteros se aceptan como opción.\n")
 
         # Si opción es 1, se imprimen los porcentajes.
-        if seleccion_interface_sexo == 1:
+        elif float(seleccion_interface_sexo) == 1:
             print(f"Porcentaje hombres asesinados: {round(prevalencia_masculina,2)}%")
-            print(f"Porcentaje mujeres asesinados: {round(prevalencia_femenina,2)}%\n")
+            print(f"Porcentaje mujeres asesinadas: {round(prevalencia_femenina,2)}%\n")
         
         # Si opción es 2, se muestra el diagrama de pie.
-        elif seleccion_interface_sexo == 2:
+        elif float(seleccion_interface_sexo) == 2:
             plt.show()
 
         # Si opción es 3, se sale del Menú Secundario.
-        elif seleccion_interface_sexo == 3:
+        elif float(seleccion_interface_sexo) == 3:
             break
 
         # Si no se elige una opción válida, se presenta el siguiente mensaje.
         else:
-            print("Elige una opción válida.")
+            print("Elige una opción válida.\n")
 
 # Se define la función tipo de arma.
 def tipo_de_arma():
@@ -294,11 +304,14 @@ def tipo_de_arma():
         print("3. Salir.\n")
 
         # Selección de la opción indicada.
-        seleccion_interface_arma = int(input("Opción: "))
+        seleccion_interface_arma = input("Opción: ")
 
+        if not seleccion_interface_arma.isnumeric():
+            print("Solo enteros se aceptan como opción.\n")
+        
         # Si se elige la opción 1, se muestran los porcentajes de tipos
         # de armas utilizadas más frecuentes.
-        if seleccion_interface_arma == 1:
+        elif float(seleccion_interface_arma) == 1:
             print("Porcentaje de Tipo de Armas:")
             print(f"Pistola: {porcentaje_pistola}%")
             print(f"Cuchillo: {porcentaje_cuchillo}%")
@@ -308,16 +321,16 @@ def tipo_de_arma():
             print(f"Otro: {porcentaje_otros}%\n")
         
         # Si se elige la opción 2, se muestra el diegrama de pie.
-        elif seleccion_interface_arma == 2:
+        elif float(seleccion_interface_arma) == 2:
             plt.show()
         
         # Si se sale la opción 3, se sale del Menú Secundario.
-        elif seleccion_interface_arma == 3:
+        elif float(seleccion_interface_arma) == 3:
             break
 
         # Si no se elige una opción existente, se presenta el siguiente mensaje.
         else:
-            print("Elige una opción válida.")
+            print("Elige una opción válida.\n")
 
 # Se define la función promedio, de una lista
 def mi_promedio(lista):
@@ -369,6 +382,9 @@ def mi_moda(lista):
 
 # Se define la función mediana, de una lista
 def mi_mediana(lista):
+    # Ordenamos la lista
+    lista.sort()
+
     # Si la lista tiene una cantidad de elementos impar,
     # se regresa el valor de en medio de la lista.
     if len(lista)%2 != 0:
@@ -494,7 +510,6 @@ def edades_de_asesinados():
     # Menú Secundario: Estadísticos de Edades.
     # While loop, mantiene abierta la función.
     while True:
-
         # Posibles opcines
         print("1.  Media de Edades.")
         print("2.  Moda de Edades.")
@@ -509,51 +524,55 @@ def edades_de_asesinados():
         print("11. Salir.\n")
 
         # Selector de opciones.
-        seleccion_interface_edad = int(input("Opción: "))
+        seleccion_interface_edad = input("Opción: ")
 
+        if not seleccion_interface_edad.isnumeric():
+            print("Solo enteros se aceptan como opción.\n")
+        
         # Si se elige la opción 1, se muestra la media de edades.
-        if seleccion_interface_edad == 1:
+        elif float(seleccion_interface_edad) == 1:
             print(f"Media: {round(mi_promedio(lista_edades),2)} años.\n")
 
         # Si se elige la opción 2, se muestra la moda de años.
-        elif seleccion_interface_edad == 2:
+        elif float(seleccion_interface_edad) == 2:
             print(f"Edad o edades más comunes: {mi_moda(lista_edades)} años.\n")
 
         # Si se elige la opción 3, se muestra la mediana de la lista de edades
-        elif seleccion_interface_edad == 3:
+        elif float(seleccion_interface_edad) == 3:
             print(f"Mediana: {mi_mediana(lista_edades)} años.\n")
 
         # Si seelige la opción 4, se muestra la edad máxima de la lista.
-        elif seleccion_interface_edad == 4:
+        elif float(seleccion_interface_edad) == 4:
             print(f"Edad Máxima: {mi_max(lista_edades)} años.\n")
         
         # Si se elige la opción 5, se muestra la edad mínima de la lista.
-        elif seleccion_interface_edad == 5:
+        elif float(seleccion_interface_edad) == 5:
             print(f"Edad Mínima: {mi_min(lista_edades)} años.\n")
 
         # Si se elige la opción 6, se muestra el rango de edades.
-        elif seleccion_interface_edad == 6:
+        elif float(seleccion_interface_edad) == 6:
             print(f"Rango de Edades: {mi_rango(lista_edades)} años.\n")
         
         # Si se elige la opción 7, se muestra la varianza de las edades.
-        elif seleccion_interface_edad == 7:
+        elif float(seleccion_interface_edad) == 7:
             print(f"Varianza de Edades: {round(mi_varianza(lista_edades),2)} años.\n")
 
         # Si se elige la opción 8, se muestra la desviación de edades.
-        elif seleccion_interface_edad == 8:
+        elif float(seleccion_interface_edad) == 8:
             print(f"Desvaición de Edades: {round(mi_desviacion(lista_edades),2)} años.\n")
         
         # Si se elige la opción 9, se muestran los datos del 
         # diccionario rangos_edad 
-        elif seleccion_interface_edad == 9:
+        elif float(seleccion_interface_edad) == 9:
             pprint.pprint(rangos_edad)
+            print()
         
         # Si se elige la opción 10, se muestra el histograma de rangos de edad
-        elif seleccion_interface_edad == 10:
+        elif float(seleccion_interface_edad) == 10:
             plt.show()
         
         # Si se elige la opción 11, se sale del Menú Secundario.
-        elif seleccion_interface_edad == 11:
+        elif float(seleccion_interface_edad) == 11:
             break
 
         # Si se elige una opción no existente, se presenta el 
@@ -637,60 +656,84 @@ def probabilidad_ser_asesinado():
         print("4. Salir.\n")
 
         # Selector de opción
-        seleccion_interface_prob_edad = int(input("Opción: "))
+        seleccion_interface_prob_edad = input("Opción: ")
 
+        if not seleccion_interface_prob_edad.isnumeric():
+            print("Solo enteros se aceptan como opción.\n")
 
-        if seleccion_interface_prob_edad == 1:
+        elif float(seleccion_interface_prob_edad) == 1:
             # Se pide edad y puntos de la simuclación
-            edad_prob = int(input("Edad: "))
-            ptos_monte_carlo = int(input("Puntos Simulación Monte-Carlo: "))
+            edad_prob = input("Edad: ")
+            ptos_monte_carlo = input("Puntos Simulación Monte-Carlo: ")
+            print()
 
+            while (edad_prob.isalpha() or ptos_monte_carlo.isalpha()
+                   or float(edad_prob) < 0 or float(ptos_monte_carlo) < 0):
+                print("Solo se aceptan valores numéricos mayores a 0.")
+                edad_prob = input("Edad: ")
+                ptos_monte_carlo = input("Puntos Simulación Monte-Carlo: ")
+                print()
+        
             # Se presenta el gráfico
             probabilidad_de_morir(mi_promedio(lista_edades),
                                   mi_desviacion(lista_edades),
-                                  ptos_monte_carlo,
+                                  int(float(ptos_monte_carlo)),
                                   mi_promedio(lista_edades)-50,
-                                  edad_prob)
+                                  float(edad_prob))
 
-        elif seleccion_interface_prob_edad == 2:
+        elif float(seleccion_interface_prob_edad) == 2:
             # Se pide edad y puntos de la simuclación
-            edad_prob = int(input("Edad: "))
-            ptos_monte_carlo = int(input("Puntos Simulación Monte-Carlo: "))
+            edad_prob = input("Edad: ")
+            ptos_monte_carlo = input("Puntos Simulación Monte-Carlo: ")
+            print()
+
+            while (edad_prob.isalpha() or ptos_monte_carlo.isalpha() or 
+                   float(edad_prob) < 0 or float(ptos_monte_carlo) < 0):
+                print("Solo se aceptan valores numéricos mayores a 0.")
+                edad_prob = input("Edad: ")
+                ptos_monte_carlo = input("Puntos Simulación Monte-Carlo: ")
+                print()
 
             # Se presenta el gráfico
             probabilidad_de_morir(mi_promedio(lista_edades),
                                   mi_desviacion(lista_edades),
-                                  ptos_monte_carlo,edad_prob,
+                                  int(float(ptos_monte_carlo)),
+                                  float(edad_prob),
                                   mi_promedio(lista_edades)+50)
         
-        elif seleccion_interface_prob_edad == 3:
+        elif float(seleccion_interface_prob_edad) == 3:
             # Se pide edad y puntos de la simuclación
             print("La primera edad debe ser menor a la segunda.")
-            edad_prob_1 = int(input("Edad 1: "))
-            edad_prob_2 = int(input("Edad 2: "))
-
-            # Si la edad 1 es mayor a la edad 2, se vuelven a pedir hasta
-            # que se no se cumpla que la edad 1 es menor a la edad 2.
-            while edad_prob_1 > edad_prob_2:
-                print("ERROR: La primera edad debe ser menor a la segunda.")
-                edad_prob_1 = int(input("Edad 1: "))
-                edad_prob_2 = int(input("Edad 2: "))
-            ptos_monte_carlo = int(input("Puntos Simulación Monte-Carlo: "))
+            edad_prob_1 = input("Edad 1: ")
+            edad_prob_2 = input("Edad 2: ")
+            ptos_monte_carlo = input("Puntos Simulación Monte-Carlo: ")
+            print()
+            
+            while (edad_prob_1.isalpha() or  ptos_monte_carlo.isalpha() or
+                   edad_prob_2.isalpha() or float(edad_prob_1) < 0 or 
+                   float(edad_prob_2) < 0 or float(ptos_monte_carlo) < 0 or 
+                   (edad_prob_1 > edad_prob_2)) :
+                   print("La primera edad debe ser menor a la segunda.")
+                   print("Solo se aceptan valores numéricos.")
+                   edad_prob_1 = input("Edad 1: ")
+                   edad_prob_2 = input("Edad 2: ")
+                   ptos_monte_carlo = input("Puntos Simulación Monte-Carlo: ")
+                   print()
 
             # Se presenta el gráfico
             probabilidad_de_morir(mi_promedio(lista_edades),
                                   mi_desviacion(lista_edades),
-                                  ptos_monte_carlo,
-                                  edad_prob_1,
-                                  edad_prob_2)
+                                  int(float(ptos_monte_carlo)),
+                                  float(edad_prob_1),
+                                  float(edad_prob_2))
 
         # Si la opción es 4, se sale del menú secudario.
-        elif seleccion_interface_prob_edad == 4:
+        elif float(seleccion_interface_prob_edad) == 4:
             break
 
         # Si no se elige una opción válida, se presenta el siguinete mensaje.
         else:
-            print("Elige una opción válida.")
+            print("Elige una opción válida.\n")
 
 def asesinatos_raza():
     # Se abre, lee y enlista el documento csv.
@@ -747,6 +790,8 @@ def asesinatos_raza():
             labels=lista_labels,
             autopct="%1.1f%%")
     plt.legend(bbox_to_anchor=(0.8, 0.1, 0.5, 0.5))
+
+    plt.title("Porcentaje de Asesinados según su Raza.",fontdict={"fontsize":20})
     plt.tight_layout()
 
     # Menú Secundario: Asesinatos Según Raza.
@@ -759,23 +804,26 @@ def asesinatos_raza():
         print("4. Salir.\n")
 
         # Selector de opción
-        seleccion_interface_raza = int(input("Opción: "))
+        seleccion_interface_raza = input("Opción: ")
 
-        if seleccion_interface_raza == 1:
+        if not seleccion_interface_raza.isnumeric():
+            print("Solo enteros se aceptan como opción.\n")
+        
+        elif float(seleccion_interface_raza) == 1:
             pprint.pprint(cant_asesinados_raza)
             print()
-        elif seleccion_interface_raza == 2:
+        elif float(seleccion_interface_raza) == 2:
             print(f"Blancos asesinados: {round(porcentaje_asesinados_white,2)} %.")
             print(f"Afroamericanos asesinados: {round(porcentaje_asesinados_black,2)} %.")
             print(f"Latinos asesinados: {round(porcentaje_asesinados_latin,2)} %.")
             print(f"Asiáticos asesinados: {round(porcentaje_asesinados_asian,2)} %.")
             print(f"Otros grupos étnicos asesinados: {round(porcentaje_asesinados_other,2)} %.\n")
-        elif seleccion_interface_raza == 3:
+        elif float(seleccion_interface_raza) == 3:
             plt.show()
-        elif seleccion_interface_raza == 4:
+        elif float(seleccion_interface_raza) == 4:
             break
         else:
-            print("Opción no válida.")
+            print("Opción no válida.\n")
 
 if __name__ == "__main__":
     interface()
